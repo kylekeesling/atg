@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "rubyserial"
-
 module Atg
   class LiquidStatusReport < Base
     CODE = "i30100"

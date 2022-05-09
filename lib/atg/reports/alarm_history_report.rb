@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "rubyserial"
-
 module Atg
   class AlarmHistoryReport < Base
     CODE = "i11100"

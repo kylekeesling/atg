@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-require "rubyserial"
-
 module Atg
-  class TankInventoryReport < Base
-    CODE = "i20100"
-    RESPONSE_OBJECT = InventoryRecord
+  class ActiveAlarmReport < Base
+    CODE = "i11300"
+    RESPONSE_OBJECT = ActiveAlarm
 
     def self.run(port:)
       command = Command.new(port: port, code: CODE, response_object: RESPONSE_OBJECT)

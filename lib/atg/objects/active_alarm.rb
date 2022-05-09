@@ -1,14 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "alarm_codes"
 require "digest"
 
 module Atg
   class ActiveAlarm < Base
-    include AlarmCodes
-
-    attr_accessor :alarm_category_code, :sensor_category_code, :alarm_type_number,
-      :tank_sensor_number, :occurred_at
+    attr_accessor :alarm_category_code, :category, :sensor_category_code, :sensor_category, :alarm_type_number, :type, :tank_sensor_number, :state, :occurred_at
 
     ENTRY_LENGTH = 20
     ENTRY_START_POSITION = 96
@@ -19,6 +15,19 @@ module Atg
       @alarm_type_number = data[4..5]
       @tank_sensor_number = data[6..7]
       @occurred_at = parse_timestamp(data[8..17])
+
+      alarm_attributes =
+        AlarmAttributes.new(
+          category_code: @alarm_category_code,
+          type_number: @alarm_type_number,
+          state_code: @alarm_state_code,
+          sensor_category_code: @sensor_category_code
+        )
+
+      @category = alarm_attributes.category
+      @type = alarm_attributes.type
+      @state = alarm_attributes.state
+      @sensor_category = alarm_attributes.sensor_category
     end
 
     def identifier

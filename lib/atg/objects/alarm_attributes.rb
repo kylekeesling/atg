@@ -1,40 +1,16 @@
 # frozen_string_literal: true
 
 module Atg
-  module AlarmCodes
-    attr_accessor :alarm_category_code, :sensor_category_code, :alarm_type_number,
-      :tank_sensor_number, :occurred_at
-
-    ENTRY_LENGTH = 20
-    ENTRY_START_POSITION = 96
-
-    def initialize(data)
-      @alarm_category_code = data[0..1]
-      @sensor_category_code = data[2..3]
-      @alarm_type_number = data[4..5]
-      @tank_sensor_number = data[6..7]
-      @occurred_at = parse_timestamp(data[8..17])
-    end
-
-    def identifier
-      key = [
-        @alarm_category_code, @sensor_category_code, @alarm_type_number,
-        @tank_sensor_number, @occurred_at
-      ]
-
-      Digest::SHA2.hexdigest(key.join)
-    end
-
-    def warning?
-      type.include?("Warning")
-    end
-
-    def alarm?
-      !warning?
+  class AlarmAttributes
+    def initialize(category_code:, type_number:, state_code:, sensor_category_code:)
+      @category_code = category_code
+      @type_number = type_number
+      @state_code = state_code
+      @sensor_category_code = sensor_category_code
     end
 
     def category
-      case @alarm_category_code
+      case @category_code
       when "00"
         "All Functions Normal"
       when "01"
@@ -93,45 +69,45 @@ module Atg
     end
 
     def type
-      if @alarm_category_code == "01"
+      if @category_code == "01"
         system_alarm_type
-      elsif @alarm_category_code == "02"
+      elsif @category_code == "02"
         tank_alarm_type
-      elsif ["03", "04", "07", "08", "12", "13"].include?(@alarm_category_code)
+      elsif ["03", "04", "07", "08", "12", "13"].include?(@category_code)
         sensor_alarm_type
-      elsif @alarm_category_code == "05"
+      elsif @category_code == "05"
         input_alarm_type
-      elsif @alarm_category_code == "06"
+      elsif @category_code == "06"
         volumetric_link_leak_alarm_type
-      elsif @alarm_category_code == "14"
+      elsif @category_code == "14"
         auto_dial_alarm_type
-      elsif ["18", "19"].include?(@alarm_category_code)
+      elsif ["18", "19"].include?(@category_code)
         mechanical_dispenser_interface_alarm_type
-      elsif @alarm_category_code == "20"
+      elsif @category_code == "20"
         product_alarm_type
-      elsif @alarm_category_code == "21"
+      elsif @category_code == "21"
         pressure_lld_alarm_type
-      elsif @alarm_category_code == "26"
+      elsif @category_code == "26"
         wireless_plld_alarm_type
-      elsif @alarm_category_code == "28"
+      elsif @category_code == "28"
         smart_sensor_alarm_type
-      elsif @alarm_category_code == "29"
+      elsif @category_code == "29"
         modbus_alarm_type
-      elsif @alarm_category_code == "30"
+      elsif @category_code == "30"
         isd_site_alarm_type
-      elsif @alarm_category_code == "31"
+      elsif @category_code == "31"
         isd_hose_alarm_type
-      elsif @alarm_category_code == "32"
+      elsif @category_code == "32"
         isd_vapor_flow_meter_alarm_type
-      elsif @alarm_category_code == "33"
+      elsif @category_code == "33"
         pmc_alarm_type
-      elsif @alarm_category_code == "34"
+      elsif @category_code == "34"
         pump_relay_monitor_alarm_type
-      elsif @alarm_category_code == "35"
+      elsif @category_code == "35"
         vmci_dispenser_interface_alarm_type
-      elsif @alarm_category_code == "36"
+      elsif @category_code == "36"
         vmc_alarm_type
-      elsif @alarm_category_code == "99"
+      elsif @category_code == "99"
         external_alarm_type
       else
         StandardError.new("alarm_category_code '#{alarm_category_code}' not defined")
@@ -155,8 +131,8 @@ module Atg
       end
     end
 
-    def alarm_state
-      case @alarm_state_code
+    def state
+      case @state_code
       when "01"
         "Cleared"
       else
@@ -168,7 +144,7 @@ module Atg
 
     # alarm_category_code 01
     def system_alarm_type
-      case @alarm_type_number
+      case @type_number
       when "01"
         "Printer out of Paper"
       when "02"
@@ -214,7 +190,7 @@ module Atg
 
     # alarm_category_code 02
     def tank_alarm_type
-      case @alarm_type_number
+      case @type_number
       when "01"
         "Tank Setup Data Warning"
       when "02"
@@ -280,7 +256,7 @@ module Atg
 
     # alarm_category_codes 03, 04, 07, 08, 12, 13
     def sensor_alarm_type
-      case @alarm_type_number
+      case @type_number
       when "02"
         "Sensor Setup Data Warning"
       when "03"
@@ -304,7 +280,7 @@ module Atg
 
     # alarm_category_code 05
     def input_alarm_type
-      case @alarm_type_number
+      case @type_number
       when "01"
         "Input Setup Data Warning"
       when "02"
@@ -316,7 +292,7 @@ module Atg
 
     # alarm_category_code 06
     def volumetric_link_leak_alarm_type
-      case @alarm_type_number
+      case @type_number
       when "01"
         "VLLD Setup Data Warning"
       when "02"
@@ -378,7 +354,7 @@ module Atg
 
     # alarm_category_code 14
     def auto_dial_alarm_type
-      case @alarm_type_number
+      case @type_number
       when "01"
         "Autodial Setup Data Warning"
       when "02"
@@ -394,7 +370,7 @@ module Atg
 
     # alarm_category_codes 18, 19
     def mechanical_dispenser_interface_alarm_type
-      case @alarm_type_number
+      case @type_number
       when "02"
         "DIM Disabled Alarm"
       when "03"
@@ -406,7 +382,7 @@ module Atg
 
     # alarm_category_code 20
     def product_alarm_type
-      case @alarm_type_number
+      case @type_number
       when "01"
         "BIR Setup Data Warning"
       when "02"
@@ -420,7 +396,7 @@ module Atg
 
     # alarm_category_code 21
     def pressure_lld_alarm_type
-      case @alarm_type_number
+      case @type_number
       when "01"
         "PLLD Setup Data Warning"
       when "02"
@@ -462,7 +438,7 @@ module Atg
 
     # alarm_category_code 26
     def wireless_plld_alarm_type
-      case @alarm_type_number
+      case @type_number
       when "01"
         "WPLLD Setup Data Warning"
       when "02"
@@ -504,7 +480,7 @@ module Atg
 
     # alarm_category_code 28
     def smart_sensor_alarm_type
-      case @alarm_type_number
+      case @type_number
       when "01"
         "Smart Sensor Setup Data Warning"
       when "02"
@@ -544,7 +520,7 @@ module Atg
 
     # alarm_category_code 29
     def modbus_alarm_type
-      case @alarm_type_number
+      case @type_number
       when "01"
         "Improper Setup Alarm"
       when "02"
@@ -554,7 +530,7 @@ module Atg
 
     # alarm_category_code 30
     def isd_site_alarm_type
-      case @alarm_type_number
+      case @type_number
       when "01"
         "Stage 1 Transfer Monitoring Failure Warning"
       when "02"
@@ -604,7 +580,7 @@ module Atg
 
     # alarm_category_code 31
     def isd_hose_alarm_type
-      case @alarm_type_number
+      case @type_number
       when "01"
         "Collection Monitoring Gross Failure Warning"
       when "02"
@@ -624,7 +600,7 @@ module Atg
 
     # alarm_category_code 32
     def isd_vapor_flow_meter_alarm_type
-      case @alarm_type_number
+      case @type_number
       when "01"
         "Locked rotor alarm"
       end
@@ -632,7 +608,7 @@ module Atg
 
     # alarm_category_code 33
     def pmc_alarm_type
-      case @alarm_type_number
+      case @type_number
       when "01"
         "Vapor Processor Run Time Fault Warning"
       when "02"
@@ -654,7 +630,7 @@ module Atg
 
     # alarm_category_code 34
     def pump_relay_monitor_alarm_type
-      case @alarm_type_number
+      case @type_number
       when "01"
         "Setup Data Warning"
       when "02"
@@ -664,7 +640,7 @@ module Atg
 
     # alarm_category_code 35
     def vmci_dispenser_interface_alarm_type
-      case @alarm_type_number
+      case @type_number
       when "01"
         "Setup Data Warning"
       when "02"
@@ -674,7 +650,7 @@ module Atg
 
     # alarm_category_code 36
     def vmc_alarm_type
-      case @alarm_type_number
+      case @type_number
       when "01"
         "VMC Comm timeout"
       when "02"
@@ -688,7 +664,7 @@ module Atg
 
     # alarm_category_code 99
     def external_alarm_type
-      case @alarm_type_number
+      case @type_number
       when "01"
         "Externally Dectected Communication Alarm"
       when "02"
