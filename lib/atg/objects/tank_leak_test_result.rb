@@ -2,7 +2,9 @@
 
 module Atg
   class TankLeakTestResult < Base
-    # attr_accessor :sensor_number, :sensor_status_value
+    attr_accessor :tank_number, :results_to_follow, :leak_report_type_number,
+      :leak_history_number, :leak_test_type_number, :started_at, :duration_hours,
+      :volume, :percentage_full
 
     ENTRY_LENGTH = 44
     ENTRY_START_POSITION = 16
@@ -13,7 +15,7 @@ module Atg
 
       @leak_report_type_number = data[4..5]
       @leak_history_number = data[6..7]
-      @leak_type_test = data[8..9]
+      @leak_test_type_number = data[8..9]
       @started_at = parse_timestamp(data[10..19])
 
       @duration_hours = ieee754_value(data[20..27])
@@ -22,7 +24,18 @@ module Atg
     end
 
     def report_type
-      case @leak_report_type_number
+      case @leak_report_number
+      when "00"
+        "Last Test Passed"
+      when "01"
+        "Fullest Test Passed"
+      when "02"
+        "Fullest Periodic Monthly Test Passed"
+      end
+    end
+
+    def test_type
+      case @leak_test_type_number
       when "00"
         "0.2 gal/hr Test"
       when "01"
