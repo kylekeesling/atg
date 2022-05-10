@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Atg
-  class SensorStatusResult < Base
+  class LiquidSensorStatusResult < Base
     attr_accessor :sensor_number, :sensor_status_value
 
     ENTRY_LENGTH = 6

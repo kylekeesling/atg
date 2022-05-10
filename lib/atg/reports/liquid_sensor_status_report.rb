@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Atg
-  class LiquidStatusReport < Base
+  class LiquidSensorStatusReport < Base
     CODE = "i30100"
-    RESPONSE_OBJECT = SensorStatusResult
+    RESPONSE_OBJECT = LiquidSensorStatusResult
 
     def self.run(port:)
       command = Command.new(port: port, code: CODE, response_object: RESPONSE_OBJECT)

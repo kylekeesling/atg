@@ -3,7 +3,7 @@
 module Atg
   class CsldMonthlyReport < Base
     CODE = "iA56000"
-    RESPONSE_OBJECT = SensorStatusResult
+    RESPONSE_OBJECT = CsldResult
 
     def self.run(port:, timeframe: :current_month)
       flag =
