@@ -6,6 +6,7 @@ require_relative "atg/base"
 require_relative "atg/command"
 require_relative "atg/response"
 
+require_relative "atg/objects/tank"
 require_relative "atg/objects/alarm_attributes"
 require_relative "atg/objects/alarm"
 require_relative "atg/objects/active_alarm"
@@ -20,6 +21,7 @@ require_relative "atg/reports/alarm_history_report"
 require_relative "atg/reports/active_alarm_report"
 require_relative "atg/reports/tank_leak_test_report"
 require_relative "atg/reports/csld_monthly_report"
+require_relative "atg/reports/tank_report"
 
 module Atg
   class CommandNotRecognizedError < StandardError; end

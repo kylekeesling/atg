@@ -14,7 +14,7 @@ module Atg
       entry_start_position = type::ENTRY_START_POSITION
       entry_data = response[entry_start_position..(response.size - 1)]
       raw_entries = entry_data.scan(/.{#{entry_length}}/)
-      puts raw_entries
+      # puts raw_entries
       @entries = raw_entries.map { type.new(_1) }
 
       @entries.each do |entry|
