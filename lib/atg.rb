@@ -4,6 +4,7 @@ require_relative "atg/version"
 
 require_relative "atg/base"
 require_relative "atg/command"
+require_relative "atg/report"
 require_relative "atg/response"
 
 require_relative "atg/objects/tank"
@@ -27,4 +28,9 @@ require_relative "atg/reports/liquid_sensor_report"
 
 module Atg
   class CommandNotRecognizedError < StandardError; end
+
+  class InvalidResponseError < StandardError; end
+
+  SOH = "\x01" # Start of Heading
+  EXT = "\x03" # End of Text
 end

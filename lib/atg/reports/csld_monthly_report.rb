@@ -1,20 +1,22 @@
 # frozen_string_literal: true
 
 module Atg
-  class CsldMonthlyReport < Base
-    CODE = "iA56000"
-    RESPONSE_OBJECT = CsldResult
+  class CsldMonthlyReport < Report
+    private
 
-    def self.run(port:, timeframe: :current_month)
-      flag =
-        if timeframe == :previous_month
-          1
-        else
-          0
-        end
+    def self.code
+      "iA5600"
+    end
 
-      command = Command.new(port: port, code: "#{CODE}#{flag}", response_object: RESPONSE_OBJECT)
-      command.issue!
+    def self.default_data_field
+      # report_type
+      # 0=Current Month
+      # 1=Previous Month
+      0
+    end
+
+    def self.response_object
+      CsldResult
     end
   end
 end

@@ -10,6 +10,7 @@ module Atg
     ENTRY_START_POSITION = 96
 
     def initialize(data)
+      puts data
       @alarm_category_code = data[0..1]
       @sensor_category_code = data[2..3]
       @alarm_type_number = data[4..5]

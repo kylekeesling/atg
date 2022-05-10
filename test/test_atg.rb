@@ -7,7 +7,9 @@ class TestAtg < Minitest::Test
     refute_nil ::Atg::VERSION
   end
 
-  def test_it_does_something_useful
-    assert false
-  end
+  # def test_it_does_something_useful
+  #   mock = MiniTest::Mock.new
+  #   mock.expect :
+  #   Atg::LiquidSensorReport.run(port: SERIAL_PORT)
+  # end
 end

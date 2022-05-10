@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 module Atg
-  class TankInventoryReport < Base
-    CODE = "i20100"
-    RESPONSE_OBJECT = InventoryRecord
+  class TankInventoryReport < Report
+    private
 
-    def self.run(port:)
-      command = Command.new(port: port, code: CODE, response_object: RESPONSE_OBJECT)
-      command.issue!
+    def self.code
+      "i20100"
+    end
+
+    def self.response_object
+      InventoryRecord
     end
   end
 end

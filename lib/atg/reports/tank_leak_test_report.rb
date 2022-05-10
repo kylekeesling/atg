@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 module Atg
-  class TankLeakTestReport < Base
-    CODE = "i20700"
-    RESPONSE_OBJECT = TankLeakTestResult
+  class TankLeakTestReport < Report
+    private
 
-    def self.run(port:)
-      command = Command.new(port: port, code: CODE, response_object: RESPONSE_OBJECT)
-      command.issue!
+    def self.code
+      "i20700"
+    end
+
+    def self.response_object
+      TankLeakTestResult
     end
   end
 end

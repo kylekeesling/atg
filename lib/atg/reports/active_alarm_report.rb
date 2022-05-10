@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 module Atg
-  class ActiveAlarmReport < Base
-    CODE = "i11300"
-    RESPONSE_OBJECT = ActiveAlarm
+  class ActiveAlarmReport < Report
+    private
 
-    def self.run(port:)
-      command = Command.new(port: port, code: CODE, response_object: RESPONSE_OBJECT)
-      command.issue!
+    def self.code
+      "i11300"
+    end
+
+    def self.response_object
+      ActiveAlarm
     end
   end
 end
