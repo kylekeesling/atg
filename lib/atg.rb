@@ -7,6 +7,9 @@ require_relative "atg/command"
 require_relative "atg/report"
 require_relative "atg/response"
 
+require_relative "atg/adapters/serial_adapter"
+require_relative "atg/adapters/telnet_adapter"
+
 require_relative "atg/objects/tank"
 require_relative "atg/objects/liquid_sensor"
 require_relative "atg/objects/alarm_attributes"

@@ -8,18 +8,20 @@ PORT = "10001"
 # telnet.close
 # print response
 
-Atg::TankInventoryReport.run(ip_address: IP_ADDRESS, port: PORT)
-Atg::LiquidSensorStatusReport.run(ip_address: IP_ADDRESS, port: PORT)
-Atg::AlarmHistoryReport.run(ip_address: IP_ADDRESS, port: PORT)
-Atg::ActiveAlarmReport.run(ip_address: IP_ADDRESS, port: PORT)
-Atg::TankLeakTestReport.run(ip_address: IP_ADDRESS, port: PORT)
-Atg::CsldMonthlyReport.run(ip_address: IP_ADDRESS, port: PORT)
-Atg::CsldMonthlyReport.run(ip_address: IP_ADDRESS, port: PORT, data_field: "1")
+adapter = Atg::TelnetAdapter.new(ip_address: IP_ADDRESS, port: PORT)
 
-Atg::TankReport.run(ip_address: IP_ADDRESS, port: PORT)
-Atg::LiquidSensorReport.run(ip_address: IP_ADDRESS, port: PORT)
+Atg::TankInventoryReport.run(adapter: adapter)
+Atg::LiquidSensorStatusReport.run(adapter: adapter)
+Atg::AlarmHistoryReport.run(adapter: adapter)
+Atg::ActiveAlarmReport.run(adapter: adapter)
+Atg::TankLeakTestReport.run(adapter: adapter)
+Atg::CsldMonthlyReport.run(adapter: adapter)
+Atg::CsldMonthlyReport.run(adapter: adapter, data_field: "1")
 
-response = Atg::ActiveAlarmReport.run(ip_address: IP_ADDRESS, port: PORT)
+Atg::TankReport.run(adapter: adapter)
+Atg::LiquidSensorReport.run(adapter: adapter)
+
+response = Atg::ActiveAlarmReport.run(adapter: adapter)
 puts response.entries.first.category
 puts response.entries.first.type
 puts response.entries.first.identifier
