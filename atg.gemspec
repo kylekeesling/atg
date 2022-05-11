@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary = "A rubygem used to communicate with Automatic Tank Gauges (ATGs)"
   spec.homepage = "https://passtesting.com"
-  spec.license = "MIT"
+  # spec.license = "MIT"
   spec.required_ruby_version = ">= 3.1.0"
 
   spec.metadata["homepage_uri"] = spec.homepage

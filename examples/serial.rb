@@ -1,4 +1,4 @@
-require_relative "atg"
+require_relative "../lib/atg"
 
 SERIAL_PORT = "/dev/tty.usbserial-240"
 

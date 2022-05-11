@@ -1,4 +1,4 @@
-require_relative "atg"
+require_relative "../lib/atg"
 
 IP_ADDRESS = "192.168.7.142"
 PORT = "10001"
