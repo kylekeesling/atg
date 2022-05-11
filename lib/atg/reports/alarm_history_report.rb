@@ -2,8 +2,6 @@
 
 module Atg
   class AlarmHistoryReport < Report
-    private
-
     def self.code
       "i11100"
     end

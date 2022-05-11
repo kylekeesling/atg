@@ -9,7 +9,7 @@ module Atg
 
     def initialize(data)
       @sensor_number = data[0..1]
-      @sensor_status_value = data[2..3]
+      @sensor_status_value = data[2..5]
     end
 
     def status

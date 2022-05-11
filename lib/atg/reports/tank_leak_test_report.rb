@@ -2,8 +2,6 @@
 
 module Atg
   class TankLeakTestReport < Report
-    private
-
     def self.code
       "i20700"
     end

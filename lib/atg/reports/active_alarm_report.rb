@@ -2,8 +2,6 @@
 
 module Atg
   class ActiveAlarmReport < Report
-    private
-
     def self.code
       "i11300"
     end

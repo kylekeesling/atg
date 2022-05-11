@@ -2,8 +2,6 @@
 
 module Atg
   class TankReport < Report
-    private
-
     def self.code
       "i60200"
     end

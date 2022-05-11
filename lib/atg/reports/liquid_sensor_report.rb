@@ -2,8 +2,6 @@
 
 module Atg
   class LiquidSensorReport < Report
-    private
-
     def self.code
       "i70200"
     end

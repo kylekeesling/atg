@@ -2,8 +2,6 @@
 
 module Atg
   class CsldMonthlyReport < Report
-    private
-
     def self.code
       "iA5600"
     end

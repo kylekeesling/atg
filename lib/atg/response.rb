@@ -18,7 +18,7 @@ module Atg
       validate!
 
       @responded_at = parse_timestamp(@response[6..15])
-      puts "Responded at: #{@responded_at.strftime("%Y-%m-%d %H:%M:%S")}"
+      # puts "Responded at: #{@responded_at.strftime("%Y-%m-%d %H:%M:%S")}"
 
       entry_length = type::ENTRY_LENGTH
       entry_start_position = type::ENTRY_START_POSITION
@@ -26,10 +26,6 @@ module Atg
       raw_entries = entry_data.scan(/.{#{entry_length}}/)
 
       @entries = raw_entries.map { type.new(_1) }
-
-      @entries.each do |entry|
-        puts entry.inspect
-      end
     end
 
     private
