@@ -4,7 +4,8 @@ require "digest"
 
 module Atg
   class ActiveAlarm < Base
-    attr_accessor :alarm_category_code, :category, :sensor_category_code, :sensor_category, :alarm_type_number, :type, :tank_sensor_number, :state, :occurred_at
+    attr_accessor :alarm_category_code, :category, :sensor_category_code, :sensor_category,
+      :alarm_type_number, :type, :tank_sensor_number, :state, :occurred_at
 
     ENTRY_LENGTH = 18
     ENTRY_START_POSITION = 96

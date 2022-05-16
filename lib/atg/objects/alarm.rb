@@ -29,5 +29,14 @@ module Atg
       @state = alarm_attributes.state
       @sensor_category = alarm_attributes.sensor_category
     end
+
+    def identifier
+      key = [
+        @alarm_category_code, @sensor_category_code, @alarm_type_number,
+        @tank_sensor_number, @occurred_at
+      ]
+
+      Digest::SHA2.hexdigest(key.join)
+    end
   end
 end

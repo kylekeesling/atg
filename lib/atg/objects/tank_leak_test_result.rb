@@ -44,5 +44,13 @@ module Atg
         "Gross (3 gal/hr) Test"
       end
     end
+
+    def identifier
+      key = [
+        @tank_number, @leak_report_type_number, @leak_history_number, @started_at
+      ]
+
+      Digest::SHA2.hexdigest(key.join)
+    end
   end
 end
