@@ -26,6 +26,7 @@ module Atg
       raw_entries = entry_data.scan(/.{#{entry_length}}/)
 
       @entries = raw_entries.map { type.new(_1) }
+      # puts @entries.map { puts _1.inspect }
     end
 
     private
