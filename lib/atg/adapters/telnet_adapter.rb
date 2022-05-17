@@ -4,13 +4,24 @@ require "net/telnet"
 
 module Atg
   class TelnetAdapter < Base
+    RETRY_WAIT = 3
+
     def initialize(ip_address:, port: 23, timeout: 3)
+      tries ||= 3
+
       @telnet =
         Net::Telnet.new \
           "Host" => ip_address,
           "Port" => port,
           "Timeout" => timeout,
           "Prompt" => /#{EXT}/o
+    rescue Errno::ECONNREFUSED
+      if (tries -= 1).positive?
+        sleep RETRY_WAIT
+        retry
+      else
+        raise ConnectionError.new("connect refused for #{ip_address}:#{port}")
+      end
     end
 
     def description

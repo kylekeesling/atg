@@ -35,6 +35,8 @@ module Atg
 
   class InvalidResponseError < StandardError; end
 
+  class ConnectionError < StandardError; end
+
   SOH = "\x01" # Start of Heading
   EXT = "\x03" # End of Text
 end

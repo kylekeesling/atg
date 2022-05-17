@@ -37,13 +37,13 @@ module Atg
 
     def verify_response_code
       if @code != @command
-        raise Atg::InvalidResponseError.new("response code (#{@command}) does not match issued code (#{@code})")
+        raise InvalidResponseError.new("response code (#{@command}) does not match issued code (#{@code})")
       end
     end
 
     def validate_response_code
       if @response.include?(UNRECOGNIZED_RESPONSE_CODE)
-        raise Atg::CommandNotRecognizedError.new("'#{@code}' is not a recognized command")
+        raise CommandNotRecognizedError.new("'#{@code}' is not a recognized command")
       end
     end
   end
