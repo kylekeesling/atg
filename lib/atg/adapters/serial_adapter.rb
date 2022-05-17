@@ -6,6 +6,8 @@ module Atg
   class SerialAdapter < Base
     def initialize(port:)
       @serial = Serial.new(port)
+    rescue RubySerial::Error
+      raise ConnectionError.new("could not connect to serial port (#{port})")
     end
 
     def description

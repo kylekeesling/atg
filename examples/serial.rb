@@ -1,6 +1,6 @@
 require_relative "../lib/atg"
 
-SERIAL_PORT = "/dev/tty.usbserial-240"
+SERIAL_PORT = "/dev/tty.usbserial-24"
 
 # serial_port = Serial.new(SERIAL_PORT)
 # request = serial_port.write("\x01i11300")
