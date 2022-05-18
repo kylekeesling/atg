@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Atg
-  class AlarmHistoryReport < Report
+  class PriorityAlarmHistoryReport < Report
     def self.code
       "i11100"
     end

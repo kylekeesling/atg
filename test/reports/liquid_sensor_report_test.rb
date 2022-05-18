@@ -9,12 +9,10 @@ class LiquidSensorReportTest < Minitest::Test
     assert_equal 8, entries.size
 
     first_entry = entries[0]
-    assert_equal 1, first_entry.id
     assert_equal "01", first_entry.number
     assert_equal "STP SUMP NL", first_entry.location_label
 
     entries[1..7].each.with_index(2) do |entry, index|
-      assert_equal index, entry.id
       assert_equal "0#{index}", entry.number
       assert_equal "", entry.location_label
     end

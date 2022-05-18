@@ -3,25 +3,25 @@ require_relative "../lib/atg"
 IP_ADDRESS = "192.168.7.142"
 PORT = "10001"
 
-# telnet = Net::Telnet.new("Host" => IP_ADDRESS, "Port" => PORT, "Prompt" => /\x03/)
-# response = telnet.cmd("\x01i20100")
-# telnet.close
-# print response
+telnet = Net::Telnet.new("Host" => IP_ADDRESS, "Port" => PORT, "Prompt" => /\x03/)
+response = telnet.cmd("\x01I11200")
+telnet.close
+print response
 
-adapter = Atg::TelnetAdapter.new(ip_address: IP_ADDRESS, port: PORT)
+# adapter = Atg::TelnetAdapter.new(ip_address: IP_ADDRESS, port: PORT)
 
-Atg::TankInventoryReport.run(adapter: adapter)
-Atg::LiquidSensorStatusReport.run(adapter: adapter)
-Atg::AlarmHistoryReport.run(adapter: adapter)
-Atg::ActiveAlarmReport.run(adapter: adapter)
-Atg::TankLeakTestReport.run(adapter: adapter)
-Atg::CsldMonthlyReport.run(adapter: adapter)
-Atg::CsldMonthlyReport.run(adapter: adapter, data_field: "1")
+# Atg::TankInventoryReport.run(adapter: adapter)
+# Atg::LiquidSensorStatusReport.run(adapter: adapter)
+# Atg::AlarmHistoryReport.run(adapter: adapter)
+# Atg::ActiveAlarmReport.run(adapter: adapter)
+# Atg::TankLeakTestReport.run(adapter: adapter)
+# Atg::CsldMonthlyReport.run(adapter: adapter)
+# Atg::CsldMonthlyReport.run(adapter: adapter, data_field: "1")
 
-Atg::TankReport.run(adapter: adapter)
-Atg::LiquidSensorReport.run(adapter: adapter)
+# Atg::TankReport.run(adapter: adapter)
+# Atg::LiquidSensorReport.run(adapter: adapter)
 
-response = Atg::ActiveAlarmReport.run(adapter: adapter)
-puts response.entries.first.category
-puts response.entries.first.type
-puts response.entries.first.identifier
+# response = Atg::ActiveAlarmReport.run(adapter: adapter)
+# puts response.entries.first.category
+# puts response.entries.first.type
+# puts response.entries.first.identifier

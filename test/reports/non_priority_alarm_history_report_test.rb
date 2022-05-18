@@ -2,9 +2,9 @@
 
 require "test_helper"
 
-class AlarmHistoryReportTest < Minitest::Test
+class NonPriorityAlarmHistoryReportTest < Minitest::Test
   def test_alarm_history_report
-    entries = report_response(Atg::AlarmHistoryReport)
+    entries = report_response(Atg::NonPriorityAlarmHistoryReport)
 
     assert_equal 13, entries.size
 
