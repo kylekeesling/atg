@@ -4,7 +4,7 @@ IP_ADDRESS = "192.168.7.142"
 PORT = "10001"
 
 telnet = Net::Telnet.new("Host" => IP_ADDRESS, "Port" => PORT, "Prompt" => /\x03/)
-response = telnet.cmd("\x01I11200")
+response = telnet.cmd("\x01I34B00")
 telnet.close
 print response
 

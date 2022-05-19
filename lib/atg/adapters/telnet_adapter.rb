@@ -15,12 +15,12 @@ module Atg
           "Port" => port,
           "Timeout" => timeout,
           "Prompt" => /#{EXT}/o
-    rescue Errno::ECONNREFUSED
+    rescue Errno::ECONNREFUSED, Errno::EHOSTUNREACH => error
       if (tries -= 1).positive?
         sleep RETRY_WAIT
         retry
       else
-        raise ConnectionError.new("connect refused for #{ip_address}:#{port}")
+        raise ConnectionError.new("could not connect to #{ip_address}:#{port} - #{error}")
       end
     end
 
