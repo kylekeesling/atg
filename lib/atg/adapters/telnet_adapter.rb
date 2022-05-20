@@ -15,7 +15,7 @@ module Atg
           "Port" => port,
           "Timeout" => timeout,
           "Prompt" => /#{EXT}/o
-    rescue Errno::ECONNREFUSED, Errno::EHOSTUNREACH => error
+    rescue Errno::ECONNREFUSED, Errno::EHOSTUNREACH, Errno::EADDRNOTAVAIL, Net::OpenTimeout => error
       if (tries -= 1).positive?
         sleep RETRY_WAIT
         retry
