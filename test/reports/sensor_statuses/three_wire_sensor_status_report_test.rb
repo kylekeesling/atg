@@ -2,9 +2,9 @@
 
 require "test_helper"
 
-class LiquidSensorStatusReportTest < Minitest::Test
-  def test_liquid_sensor_report
-    entries = report_response(Atg::LiquidSensorStatusReport)
+class ThreeWireSensorStatusReportTest < Minitest::Test
+  def test_three_wire_sensor_status_report
+    entries = report_response(Atg::ThreeWireSensorStatusReport)
 
     assert_equal 1, entries.size
 

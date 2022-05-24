@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Atg
-  class LiquidSensor < Sensor
+  class UniversalSensor < Sensor
     def type
-      :liquid
+      :universal
     end
   end
 end

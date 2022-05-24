@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 module Atg
-  class LiquidSensorStatusReport < Report
+  class TwoWireSensorStatusReport < Report
     def self.code
-      "i30100"
+      "i34100"
     end
 
     def self.response_object
-      LiquidSensorStatusResult
+      SensorStatusResult
     end
   end
 end

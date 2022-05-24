@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Atg
-  class LiquidSensor < Sensor
+  class ThreeWireSensor < Sensor
     def type
-      :liquid
+      :three_wire
     end
   end
 end
