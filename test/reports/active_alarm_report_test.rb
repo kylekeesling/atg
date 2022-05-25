@@ -16,7 +16,6 @@ class ActiveAlarmReportTest < Minitest::Test
     assert_equal DateTime.new(2022, 5, 9, 13, 13), first_entry.occurred_at
     assert_equal "Tank Alarm", first_entry.category
     assert_equal "Tank High Water Alarm", first_entry.type
-    assert_equal "Open", first_entry.state
     assert_equal "Other", first_entry.sensor_category
 
     second_entry = entries[1]
@@ -27,7 +26,6 @@ class ActiveAlarmReportTest < Minitest::Test
     assert_equal DateTime.new(2022, 5, 9, 13, 13), second_entry.occurred_at
     assert_equal "Tank Alarm", second_entry.category
     assert_equal "Tank High Water Warning", second_entry.type
-    assert_equal "Open", second_entry.state
     assert_equal "Other", second_entry.sensor_category
   end
 end

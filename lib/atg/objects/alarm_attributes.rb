@@ -2,7 +2,7 @@
 
 module Atg
   class AlarmAttributes
-    def initialize(category_code:, type_number:, state_code:, sensor_category_code:)
+    def initialize(category_code:, type_number:, sensor_category_code:, state_code: nil)
       @category_code = category_code
       @type_number = type_number
       @state_code = state_code

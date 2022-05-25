@@ -7,7 +7,7 @@ module Atg
     UNRECOGNIZED_RESPONSE_CODE = "9999FF1B"
 
     def initialize(data, code:, type:)
-      @response, checksum = data.split("&&")
+      @response, _checksum = data.split("&&")
 
       @response.delete!(SOH)
       @response.delete!(EXT)
