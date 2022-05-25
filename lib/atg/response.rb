@@ -2,11 +2,12 @@
 
 module Atg
   class Response < Base
-    attr_accessor :entries, :responded_at
+    attr_accessor :raw_data, :response, :entries, :responded_at
 
     UNRECOGNIZED_RESPONSE_CODE = "9999FF1B"
 
     def initialize(data, code:, type:)
+      @raw_data = data
       @response, _checksum = data.split("&&")
 
       @response.delete!(SOH)
