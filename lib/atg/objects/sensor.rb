@@ -11,5 +11,9 @@ module Atg
       @number = data[0..1]
       @label = data[2..21].rstrip
     end
+
+    def type
+      # define in the subclass
+    end
   end
 end
