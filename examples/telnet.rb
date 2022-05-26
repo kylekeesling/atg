@@ -4,7 +4,7 @@ IP_ADDRESS = "192.168.7.142"
 PORT = "10001"
 
 # telnet = Net::Telnet.new("Host" => IP_ADDRESS, "Port" => PORT, "Prompt" => /\x03/)
-# response = telnet.cmd("\x01i20700")
+# response = telnet.cmd("\x01I20800")
 # telnet.close
 # print response
 
@@ -21,5 +21,5 @@ adapter = Atg::TelnetAdapter.new(ip_address: IP_ADDRESS, port: PORT)
 # Atg::TankReport.run(adapter: adapter)
 # Atg::LiquidSensorReport.run(adapter: adapter)
 
-response = Atg::TankLeakTestReport.run(adapter: adapter)
+# response = Atg::TankLeakTestReport.run(adapter: adapter)
 puts response.entries.first.inspect

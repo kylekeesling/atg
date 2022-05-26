@@ -33,7 +33,8 @@ module Atg
     private
 
     def validate!
-      validate_response_code && verify_response_code
+      validate_response_code
+      verify_response_code
     end
 
     def verify_response_code
