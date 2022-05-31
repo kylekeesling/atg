@@ -28,7 +28,7 @@ require_relative "atg/objects/alarm"
 require_relative "atg/objects/active_alarm"
 
 require_relative "atg/objects/inventory_record"
-require_relative "atg/objects/tank_leak_test_result"
+require_relative "atg/objects/tank_leak_test_history_record"
 require_relative "atg/objects/csld_result"
 
 require_relative "atg/reports/priority_alarm_history_report"
@@ -37,7 +37,7 @@ require_relative "atg/reports/active_alarm_report"
 
 require_relative "atg/reports/tank_report"
 require_relative "atg/reports/tank_inventory_report"
-require_relative "atg/reports/tank_leak_test_report"
+require_relative "atg/reports/tank_leak_test_history_report"
 require_relative "atg/reports/csld_monthly_report"
 
 require_relative "atg/reports/sensors/liquid_sensor_report"

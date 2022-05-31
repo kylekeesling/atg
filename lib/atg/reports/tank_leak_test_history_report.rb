@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 module Atg
-  class TankLeakTestReport < Report
+  class TankLeakTestHistoryReport < Report
     def self.code
       "i20700"
     end
 
     def self.response_object
-      TankLeakTestResult
+      TankLeakTestHistoryRecord
     end
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Atg
-  class TankLeakTestResult < Base
+  class TankLeakTestHistoryRecord < Base
     attr_accessor :tank_number, :results_to_follow, :leak_report_type_number,
       :leak_history_number, :leak_test_type_number, :started_at, :duration_hours,
       :volume, :percentage_full
