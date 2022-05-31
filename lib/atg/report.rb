@@ -3,8 +3,7 @@
 module Atg
   class Report < Base
     def self.run(**options)
-      options[:code] = code
-      options[:response_object] = response_object
+      options[:report] = self
       options[:data_field] ||= default_data_field
 
       command = Command.new(**options)

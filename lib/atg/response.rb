@@ -6,28 +6,30 @@ module Atg
 
     UNRECOGNIZED_RESPONSE_CODE = "9999FF1B"
 
-    def initialize(data, code:, type:)
+    def initialize(data, report:)
       @raw_data = data
       @response, _checksum = data.split("&&")
 
       @response.delete!(SOH)
       @response.delete!(EXT)
-
-      @code = code
       @command = @response[0..5]
+
+      @report = report
+      @code = @report.code
+      @response_object_type = @report.response_object
 
       validate!
 
       @responded_at = parse_timestamp(@response[6..15])
 
-      entry_length = type::ENTRY_LENGTH
-      entry_start_position = type::ENTRY_START_POSITION
+      entry_length = @report::ENTRY_LENGTH
+      entry_start_position = @report::ENTRY_START_POSITION
       entry_data = @response[entry_start_position..(@response.size - 1)]
       raw_entries = entry_data.scan(/.{#{entry_length}}/)
 
-      @entries = raw_entries.map { type.new(_1) }
-    rescue
-      raise InvalidResponseError.new("invalid response for command (#{@code}) - '#{data}'")
+      @entries = raw_entries.map { @response_object_type.new(_1) }
+      # rescue
+      #   raise InvalidResponseError.new("invalid response for command (#{@code}) - '#{data}'")
     end
 
     private

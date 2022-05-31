@@ -2,6 +2,9 @@
 
 module Atg
   class ActiveAlarmReport < Report
+    ENTRY_LENGTH = 18
+    ENTRY_START_POSITION = 96
+
     def self.code
       "i11300"
     end

@@ -4,9 +4,6 @@ module Atg
   class SensorStatusResult < Base
     attr_accessor :sensor_number, :sensor_status_value
 
-    ENTRY_LENGTH = 6
-    ENTRY_START_POSITION = 16
-
     def initialize(data)
       @sensor_number = data[0..1]
       @sensor_status_value = data[2..5]
