@@ -13,11 +13,6 @@ module Atg
     end
 
     def issue!
-      # time = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-      # puts "======================================="
-      # puts "command #{@command_string} issued #{time} via #{@adapter.description}"
-      # puts "======================================="
-
       response_string = @adapter.write(@command_string)
       Response.new(response_string, code: @code, type: @response_object)
     end
