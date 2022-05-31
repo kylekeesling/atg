@@ -24,7 +24,7 @@ module Atg
     end
 
     def report_type
-      case @leak_report_number
+      case @leak_report_type_number
       when "00"
         "Last Test Passed"
       when "01"
