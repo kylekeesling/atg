@@ -2,15 +2,16 @@
 
 module Atg
   class TankInventoryReport < Report
-    ENTRY_LENGTH = 65
-    ENTRY_START_POSITION = 16
-
-    def self.code
+    def command_code
       "i20100"
     end
 
-    def self.response_object
+    def result_object
       InventoryRecord
+    end
+
+    def result_length
+      65
     end
   end
 end

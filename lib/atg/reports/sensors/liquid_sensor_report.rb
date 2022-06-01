@@ -2,15 +2,16 @@
 
 module Atg
   class LiquidSensorReport < Report
-    ENTRY_LENGTH = 22
-    ENTRY_START_POSITION = 16
-
-    def self.code
+    def command_code
       "i70200"
     end
 
-    def self.response_object
+    def result_object
       LiquidSensor
+    end
+
+    def result_length
+      22
     end
   end
 end

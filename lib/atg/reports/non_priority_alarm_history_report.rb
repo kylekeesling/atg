@@ -2,15 +2,16 @@
 
 module Atg
   class NonPriorityAlarmHistoryReport < Report
-    ENTRY_LENGTH = 20
-    ENTRY_START_POSITION = 16
-
-    def self.code
+    def command_code
       "i11200"
     end
 
-    def self.response_object
+    def result_object
       Alarm
+    end
+
+    def result_length
+      20
     end
   end
 end

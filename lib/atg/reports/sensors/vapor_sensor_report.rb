@@ -2,15 +2,16 @@
 
 module Atg
   class VaporSensorReport < Report
-    ENTRY_LENGTH = 22
-    ENTRY_START_POSITION = 16
-
-    def self.code
+    def command_code
       "i70700"
     end
 
-    def self.response_object
+    def result_object
       VaporSensor
+    end
+
+    def result_length
+      22
     end
   end
 end
