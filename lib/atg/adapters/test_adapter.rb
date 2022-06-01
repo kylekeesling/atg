@@ -4,8 +4,7 @@ require "net/telnet"
 
 module Atg
   class TestAdapter < Base
-    def initialize(stub:)
-      @stub = stub
+    def initialize
     end
 
     def description
@@ -13,7 +12,11 @@ module Atg
     end
 
     def write(command_string)
-      @stub
+      command_string.delete!(SOH)
+      command_string.delete!(EXT)
+
+      fixture_path = "#{Dir.pwd}/test/fixtures/#{command_string}.txt"
+      File.read(fixture_path)
     end
 
     def close

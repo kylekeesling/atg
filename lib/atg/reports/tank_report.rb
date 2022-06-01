@@ -2,12 +2,16 @@
 
 module Atg
   class TankReport < Report
-    def self.code
+    def command_code
       "i60200"
     end
 
-    def self.response_object
+    def result_object
       Tank
+    end
+
+    def result_length
+      22
     end
   end
 end

@@ -2,12 +2,16 @@
 
 module Atg
   class TwoWireSensorReport < Report
-    def self.code
+    def command_code
       "i74200"
     end
 
-    def self.response_object
+    def result_object
       TwoWireSensor
+    end
+
+    def result_length
+      22
     end
   end
 end

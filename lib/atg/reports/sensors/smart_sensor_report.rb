@@ -2,12 +2,16 @@
 
 module Atg
   class SmartSensorReport < Report
-    def self.code
+    def command_code
       "i72200"
     end
 
-    def self.response_object
+    def result_object
       SmartSensor
+    end
+
+    def result_length
+      22
     end
   end
 end

@@ -2,12 +2,16 @@
 
 module Atg
   class TankInventoryReport < Report
-    def self.code
+    def command_code
       "i20100"
     end
 
-    def self.response_object
+    def result_object
       InventoryRecord
+    end
+
+    def result_length
+      65
     end
   end
 end

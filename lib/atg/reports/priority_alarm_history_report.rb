@@ -2,12 +2,16 @@
 
 module Atg
   class PriorityAlarmHistoryReport < Report
-    def self.code
+    def command_code
       "i11100"
     end
 
-    def self.response_object
+    def result_object
       Alarm
+    end
+
+    def result_length
+      20
     end
   end
 end

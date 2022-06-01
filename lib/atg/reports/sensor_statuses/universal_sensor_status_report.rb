@@ -2,12 +2,16 @@
 
 module Atg
   class UniversalSensorStatusReport < Report
-    def self.code
+    def command_code
       "i34B00"
     end
 
-    def self.response_object
+    def result_object
       SensorStatusResult
+    end
+
+    def result_length
+      6
     end
   end
 end

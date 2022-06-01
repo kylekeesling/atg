@@ -2,19 +2,16 @@
 
 module Atg
   class CsldMonthlyReport < Report
-    def self.code
+    def command_code
       "iA5600"
     end
 
-    def self.default_data_field
-      # report_type
-      # 0=Current Month
-      # 1=Previous Month
-      0
+    def result_object
+      CsldResult
     end
 
-    def self.response_object
-      CsldResult
+    def result_length
+      16
     end
   end
 end

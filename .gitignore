@@ -7,3 +7,4 @@
 /spec/reports/
 /tmp/
 socat.log
+.DS_Store
