@@ -1,6 +1,6 @@
 module Atg
   class Report < Base
-    attr_accessor :responded_at
+    attr_accessor :responded_at, :raw_data
 
     UNRECOGNIZED_RESPONSE_CODE = "9999FF1B"
 
@@ -38,6 +38,7 @@ module Atg
     private
 
     def process(data)
+      @raw_data = data
       @response, _checksum = data.split("&&")
       @response.delete!(SOH)
       @response.delete!(EXT)
