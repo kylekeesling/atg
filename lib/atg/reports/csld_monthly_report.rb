@@ -2,9 +2,6 @@
 
 module Atg
   class CsldMonthlyReport < Report
-    ENTRY_LENGTH = 16
-    ENTRY_START_POSITION = 16
-
     def self.code
       "iA5600"
     end

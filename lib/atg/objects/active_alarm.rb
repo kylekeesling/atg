@@ -7,6 +7,9 @@ module Atg
     attr_accessor :alarm_category_code, :category, :sensor_category_code, :sensor_category,
       :alarm_type_number, :type, :tank_sensor_number, :occurred_at
 
+    ENTRY_LENGTH = 18
+    ENTRY_START_POSITION = 96
+
     def initialize(data)
       @alarm_category_code = data[0..1]
       @sensor_category_code = data[2..3]

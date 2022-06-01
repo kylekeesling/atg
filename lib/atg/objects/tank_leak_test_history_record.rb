@@ -6,9 +6,12 @@ module Atg
       :leak_history_number, :leak_test_type_number, :started_at, :duration_hours,
       :volume, :percentage_full
 
+    ENTRY_LENGTH = 44
+    ENTRY_START_POSITION = 16
+
     def initialize(data)
       @tank_number = data[0..1]
-      @results_to_follow = data[2..3].to_i(16) # is a hex value
+      @results_to_follow = data[2..3].to_i
 
       @leak_report_type_number = data[4..5]
       @leak_history_number = data[6..7]

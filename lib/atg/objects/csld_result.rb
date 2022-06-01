@@ -4,6 +4,9 @@ module Atg
   class CsldResult < Base
     attr_accessor :tank_number, :state_changes, :changed_at, :state_change_code
 
+    ENTRY_LENGTH = 16
+    ENTRY_START_POSITION = 16
+
     def initialize(data)
       @tank_number = data[0..1]
       @state_changes = data[2..3].to_i

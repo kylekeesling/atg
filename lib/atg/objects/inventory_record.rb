@@ -5,6 +5,9 @@ module Atg
     attr_accessor :tank_number, :product_code, :tank_status_bits, :number_of_fields,
       :volume, :tc_volume, :ullage, :height, :water, :temperature, :water_volume
 
+    ENTRY_LENGTH = 65
+    ENTRY_START_POSITION = 16
+
     def initialize(data)
       @tank_number = data[0..1]
       @product_code = data[2]

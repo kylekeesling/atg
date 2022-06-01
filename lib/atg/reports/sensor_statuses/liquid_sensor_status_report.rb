@@ -2,9 +2,6 @@
 
 module Atg
   class LiquidSensorStatusReport < Report
-    ENTRY_LENGTH = 6
-    ENTRY_START_POSITION = 16
-
     def self.code
       "i30100"
     end
