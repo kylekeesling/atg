@@ -2,24 +2,22 @@
 
 module Atg
   class TankLeakTestResult < Base
-    attr_accessor :tank_number, :results_to_follow, :result_type_code,
-      :manifold_status_code, :started_at, :result_code, :test_rate,
-      :duration_hours, :volume
+    attr_accessor :tank_number, :result_type_code, :manifold_status_code,
+      :started_at, :result_code, :test_rate, :duration_hours, :volume
 
     def initialize(data)
       @tank_number = data[0..1]
-      @results_to_follow = data[2..3].to_i(16) # is a hex value
 
-      @result_type_code = data[4..5]
-      @manifold_status_code = data[6..7]
+      @result_type_code = data[2..3]
+      @manifold_status_code = data[4..5]
 
-      @started_at = parse_timestamp(data[8..17])
+      @started_at = parse_timestamp(data[6..15])
 
-      @result_code = data[18..19]
+      @result_code = data[16..17]
 
-      @test_rate = ieee754_value(data[20..26])
-      @duration_hours = ieee754_value(data[27..35])
-      @volume = ieee754_value(data[36..43])
+      @test_rate = ieee754_value(data[18..25])
+      @duration_hours = ieee754_value(data[26..33])
+      @volume = ieee754_value(data[34..41])
     end
 
     def result_type

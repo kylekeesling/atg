@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Atg
-  class TankLeakTestHistoryReport < Report
+  class TankLeakTestResultsReport < Report
     def command_code
-      "i20700"
+      "i20800"
     end
 
     def result_object
@@ -32,7 +32,7 @@ module Atg
 
         tank_results.each do |result|
           result_string = [tank_number, result].join
-          results << TankLeakTestHistoryRecord.new(result_string)
+          results << TankLeakTestResult.new(result_string)
         end
       end
 
