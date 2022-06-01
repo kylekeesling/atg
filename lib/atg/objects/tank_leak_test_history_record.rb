@@ -5,6 +5,9 @@ module Atg
     attr_accessor :tank_number, :report_type_code, :leak_history_number, :test_type_code,
       :started_at, :duration_hours, :volume, :percentage_full
 
+    ENTRY_LENGTH = 44
+    ENTRY_START_POSITION = 16
+
     def initialize(data)
       @tank_number = data[0..1]
 

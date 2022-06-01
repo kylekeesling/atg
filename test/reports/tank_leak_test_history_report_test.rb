@@ -3,7 +3,7 @@
 require "test_helper"
 
 class TankLeakTestHistoryReportTest < Minitest::Test
-  def test_tank_leak_test_history_report
+  def test_tank_inventory_report
     entries = report_response(Atg::TankLeakTestHistoryReport)
 
     assert_equal 1, entries.size
