@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Atg
-  class CsldMonthlyReport < Report
+  class CsldResultsReport < Report
     def command_code
-      "iA5600"
+      "i25100"
     end
 
     def result_object
@@ -11,7 +11,7 @@ module Atg
     end
 
     def result_length
-      16
+      4
     end
   end
 end

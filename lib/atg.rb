@@ -38,7 +38,7 @@ require_relative "atg/reports/tank_report"
 require_relative "atg/reports/tank_inventory_report"
 require_relative "atg/reports/tank_leak_test_history_report"
 require_relative "atg/reports/tank_leak_test_results_report"
-require_relative "atg/reports/csld_monthly_report"
+require_relative "atg/reports/csld_results_report"
 
 require_relative "atg/reports/sensors/liquid_sensor_report"
 require_relative "atg/reports/sensors/groundwater_sensor_report"
