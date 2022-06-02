@@ -4,9 +4,6 @@ module Atg
   class CsldResult < Base
     attr_accessor :tank_number, :result_code
 
-    ENTRY_LENGTH = 4
-    ENTRY_START_POSITION = 16
-
     def initialize(data)
       @tank_number = data[0..1]
       @result_code = data[2..3]

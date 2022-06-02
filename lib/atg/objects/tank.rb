@@ -6,9 +6,6 @@ module Atg
   class Tank < Base
     attr_accessor :number, :product_label
 
-    ENTRY_LENGTH = 22
-    ENTRY_START_POSITION = 16
-
     def initialize(data)
       @number = data[0..1]
       @product_label = data[2..21].rstrip
