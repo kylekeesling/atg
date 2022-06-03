@@ -47,21 +47,37 @@ module Atg
       validate!
       @responded_at = parse_timestamp(@response[6..15])
 
-      parse_response_results
+      @results_data = @response[results_start_position..(@response.size - 1)]
+      @cursor = 0
+      @results = []
 
-      # rescue
-      #   raise InvalidResponseError.new("invalid response for command (#{command_code}) - '#{data}'")
+      parse_response_results
+    rescue
+      raise InvalidResponseError.new("invalid response for command (#{command_code}) - '#{data}'")
     end
 
-    # In most cases this method will break @response into the proper
+    # In most cases this method will break @results_data into the proper
     # objects but it scenarios where it doesn't it can be overridden
-    # in the report subclass to properly handle resultsm just make sure
-    # that the method returns the result objects
+    # in the report subclass to properly handle results, just make sure
+    # that the method returns the result objects as an array
     def parse_response_results
-      results_data = @response[results_start_position..(@response.size - 1)]
-      raw_results = results_data.scan(/.{#{result_length}}/)
-
+      raw_results = @results_data.scan(/.{#{result_length}}/)
       raw_results.map { result_object.new(_1) }
+    end
+
+    def parse_repeating_result_block(result_length:, results_to_follow:, prepend_to_result: nil)
+      end_of_results_character_count = results_to_follow * result_length
+      final_cursor_position = @cursor + end_of_results_character_count
+
+      while @cursor <= final_cursor_position
+        results_block = @results_data[(@cursor += 1)..(@cursor += end_of_results_character_count)]
+        results_array = results_block.scan(/.{#{result_length}}/)
+
+        results_array.each do |result|
+          result_string = [prepend_to_result, result].reject(&:nil?).join
+          @results << result_object.new(result_string)
+        end
+      end
     end
 
     def validate!
