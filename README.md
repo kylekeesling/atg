@@ -2,7 +2,7 @@
 
 This gem provides a way to communicate with automatic tank gauges (ATGs) via serial (RS-232), Telnet, or Telnet via SSH.
 
-All serial commands are documented in the accompanying PDF reference manual (Serial Interface-TLS-350.pdf).
+All serial commands are documented in the accompanying PDF reference manual [Serial Interface-TLS-350.pdf](https://github.com/kylekeesling/atg/blob/master/Serial%20Interface-TLS-350.pdf).
 
 ## Installation
 
