@@ -52,7 +52,7 @@ module Atg
       @results = []
 
       parse_response_results
-    rescue
+    rescue StandardError
       raise InvalidResponseError.new("invalid response for command (#{command_code}) - '#{data}'")
     end
 
@@ -86,17 +86,17 @@ module Atg
     end
 
     def verify_response_code_matches_issued_command
-      if command_code != @response_command
-        raise InvalidResponseError.new(
-          "response code (#{@response_command}) does not match issued code (#{command_code})"
-        )
-      end
+      return unless command_code != @response_command
+
+      raise InvalidResponseError.new(
+        "response code (#{@response_command}) does not match issued code (#{command_code})"
+      )
     end
 
     def validate_that_command_code_is_recognized
-      if @response.include?(UNRECOGNIZED_RESPONSE_CODE)
-        raise CommandNotRecognizedError.new("'#{command_code}' is not a recognized command")
-      end
+      return unless @raw_data.include?(UNRECOGNIZED_RESPONSE_CODE)
+
+      raise CommandNotRecognizedError.new("'#{command_code}' is not a recognized command")
     end
   end
 end
