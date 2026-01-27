@@ -52,8 +52,6 @@ module Atg
       @results = []
 
       parse_response_results
-    rescue StandardError
-      raise InvalidResponseError.new("invalid response for command (#{command_code}) - '#{data}'")
     end
 
     # In most cases this method will break @results_data into the proper
