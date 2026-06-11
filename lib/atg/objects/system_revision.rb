@@ -7,9 +7,11 @@ module Atg
     attr_accessor :software_number, :base_number, :version, :revision, :created_at
 
     # data is the results portion after the command echo + timestamp,
-    # e.g. "SOFTWARE# 346321-100-ACREATED - 12.02.24.10.05"
+    # e.g. "SOFTWARE# 346321-100-ACREATED - 12.02.24.10.05".
+    # Some devices pad the software number with spaces before CREATED,
+    # e.g. "SOFTWARE# 346020-100-D  CREATED - 01.12.17.15.01"
     def initialize(data)
-      software = data[/SOFTWARE#\s*(\S+?)(?=CREATED)/, 1]
+      software = data[/SOFTWARE#\s*(\S+?)\s*(?=CREATED)/, 1]
       @software_number = software
 
       if software && (parts = software.split("-")).size >= 3
