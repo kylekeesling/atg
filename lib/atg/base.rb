@@ -1,9 +1,13 @@
-# frozen_strirequire "date"
+# frozen_string_literal: true
 
 require "date"
 
 module Atg
   class Base
+    # Parses a 10-digit YYMMDDHHmm stamp. Some live TLS-350 frames carry a
+    # garbled stamp (bad month/day, stray characters); one unparseable stamp
+    # must not raise and sink the whole report, so return nil — matching
+    # SystemRevision#parse_created.
     def parse_timestamp(timestamp)
       year = timestamp[0..1].to_i
 
@@ -20,6 +24,8 @@ module Atg
       minute = timestamp[8..9].to_i
 
       DateTime.new(year, month, day, hour, minute)
+    rescue ArgumentError
+      nil
     end
 
     def ieee754_value(hex_value)
