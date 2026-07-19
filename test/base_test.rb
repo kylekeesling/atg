@@ -15,9 +15,10 @@ class BaseTest < Minitest::Test
     assert_equal DateTime.new(1998, 3, 4, 5, 6), @base.parse_timestamp("9803040506")
   end
 
-  def test_parse_timestamp_returns_nil_for_a_garbled_stamp
-    # A live TLS-350 frame with a month/day of 00 must not raise ArgumentError
-    # and sink the whole report — responded_at just comes back nil.
-    assert_nil @base.parse_timestamp("2600000000")
+  def test_parse_timestamp_raises_on_a_garbled_stamp
+    # A garbled stamp (month/day 00) must raise so the caller rejects the frame
+    # instead of parsing garbage — a real device frame always has a valid
+    # timestamp, so an unparseable one means the response isn't a real frame.
+    assert_raises(ArgumentError) { @base.parse_timestamp("2600000000") }
   end
 end
