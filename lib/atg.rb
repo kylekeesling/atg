@@ -93,6 +93,11 @@ module Atg
 
   class InvalidResponseError < StandardError; end
 
+  # Raised when a response's trailing "&&" checksum is missing or wrong — the
+  # frame was cut off (e.g. only SOH, command code, and timestamp arrived) or
+  # had bytes dropped or spliced in transit.
+  class ChecksumError < InvalidResponseError; end
+
   class ConnectionError < StandardError; end
 
   SOH = "\x01" # Start of Heading
