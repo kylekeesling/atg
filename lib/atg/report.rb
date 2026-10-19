@@ -4,6 +4,11 @@ module Atg
 
     UNRECOGNIZED_RESPONSE_CODE = "9999FF1B"
 
+    # Everything from SOH through "&&", then the four-hex-digit checksum.
+    # The trailing EXT is not required — gateways often deliver otherwise
+    # intact frames without it.
+    CHECKSUMMED_RESPONSE = /\A(?<body>.*&&)(?<checksum>\h{4})/m
+
     def initialize(adapter: nil)
       @adapter = adapter
     end
@@ -78,9 +83,23 @@ module Atg
       end
     end
 
+    # The unrecognized-command answer carries no checksum, so it is checked
+    # first and the checksum last.
     def validate!
       validate_that_command_code_is_recognized
       verify_response_code_matches_issued_command
+      verify_checksum
+    end
+
+    # Per the TLS-350 manual, the 16-bit sum of every character from SOH
+    # through "&&", plus the checksum, is zero.
+    def verify_checksum
+      match = CHECKSUMMED_RESPONSE.match(@raw_data)
+      return if match && ((match[:body].bytes.sum + match[:checksum].to_i(16)) & 0xFFFF).zero?
+
+      raise ChecksumError.new(
+        "response to '#{command_code}' failed its checksum — it was cut off or garbled (#{@raw_data.size} characters)"
+      )
     end
 
     def verify_response_code_matches_issued_command
